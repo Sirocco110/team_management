@@ -1,0 +1,31 @@
+version: "3"
+
+volumes:
+  data_base:
+
+services:
+  web:
+    build: .
+    ports:
+      - "8001:8000"
+    volumes:
+      - ".:/team_management"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db
+    links:
+      - db
+    env_file:
+      - ./.env.development
+
+  db:
+    image: postgres
+    ports: 
+            - "5432"
+    env_file:
+      - ./.env.development
+    volumes:
+      - "data_base:/var/lib/postgresql/data"
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
