@@ -11371,6 +11371,7 @@ header.masthead .bg-circle-4 {
 
 
 /*追加css*/
+
 body, #wrapper {
   display: flex;
   flex-direction: column;
@@ -11379,4 +11380,8 @@ body, #wrapper {
 
 footer {
   margin-top: auto;
+}
+
+.my-div-style {
+  margin-top: 6rem;
 }
