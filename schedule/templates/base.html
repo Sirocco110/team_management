@@ -34,11 +34,14 @@
 
 	                    	{% if user.is_authenticated %}
 	                    	<li class="nav-item"><a class="nav-link" href="{% url 'account_logout' %}">Log Out</a></li>
+	                    	<li class="nav-item"><a class="nav-link" href="{% url 'schedule:schedule' month_current.year month_current.month %}">Schedule</a></li>
 	                    	{% else %}
 	                    	<li class="nav-item {% block active_signup %}{% endblock %}"><a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a></li>
 	                        <li class="nav-item {% block active_login %}{% endblock %}"><a class="nav-link" href="{% url 'account_login' %}">Log In</a></li>
 	                    	{% endif %}
 	                        <li class="nav-item"><a class="nav-link" href="{% url 'schedule:inquiry' %}">Inquiry</a></li>
+
+
 
 	                    </ul>
 	                </div>
