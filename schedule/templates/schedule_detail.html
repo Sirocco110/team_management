@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}詳細{% endblock %}
+
+{% block contents %}
+	<div class="container">
+	    <div class="my-div-style w-100">
+	        <div class="row">
+	            <div class="col-3">
+	                <strong>概要</strong>
+	            </div>
+	            <div class="col-9">
+	                {{ schedule.summary }}
+	            </div>
+	        </div>
+
+	        <hr>
+
+	         <div class="row">
+	            <div class="col-3">
+	                <strong>場所</strong>
+	            </div>
+	            <div class="col-9">
+	                {{ object.place }}
+	            </div>
+	        </div>
+
+	        <hr>
+
+	         <div class="row">
+	            <div class="col-3">
+	                <strong>開始時間</strong>
+	            </div>
+	            <div class="col-9">
+	                {{ object.start_time }}
+	            </div>
+	        </div>
+
+	        <hr>
+
+	        <div class="row">
+	            <div class="col-3">
+	                <strong>終了時間</strong>
+	            </div>
+	            <div class="col-9">
+	                {{ object.end_time }}
+	            </div>
+	        </div>
+
+	        <hr>
+
+	        <div class="row">
+	            <div class="col-3">
+	                <strong>詳細</strong>
+	            </div>
+	            <div class="col-9">
+	                {{ object.description|linebreaksbr }}
+	            </div>
+	        </div>
+
+	        <a class="btn btn-success mt-5 mb-3" href="{% url 'schedule:schedule_update' schedule.date.year schedule.date.month schedule.date.day object.pk %}">編集</a>
+	        <a class="btn btn-danger mt-5 ml-2 mb-3" href="{% url 'schedule:schedule_delete' schedule.date.year schedule.date.month schedule.date.day object.pk %}">削除</a>
+	    </div>
+	</div>
+{% endblock %}
