@@ -19,14 +19,10 @@
                     <div class="post-preview">
                         <a href="#">
                           <h2 class="post-title">
-                            {{ team }}
+                            {{ team.name }}
                           </h2>
-                          <h3 class="post-subtitle">
-                            {% for team_u in team.teams.all %}
-                                {{ team_u }}
-                            {% endfor %}
-                          </h3>
                         </a>
+                        <p class="post-subtitle">code : {{ team.code }}</p>
                     </div>
                     <hr>
                 {% empty %}

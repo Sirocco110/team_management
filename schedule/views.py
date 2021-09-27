@@ -14,7 +14,7 @@ from django.shortcuts import redirect
 from .forms import RegisterForm
 import datetime
 
-
+from accounts.models import Team
 
 logger = logging.getLogger(__name__)
 
@@ -47,15 +47,15 @@ class InquiryView(mixins.MonthCalendarMixin, generic.FormView):
         context.update(calendar_context)
         return context
 
-class MonthCalendar(mixins.MonthCalendarMixin, generic.TemplateView):
-    """月間カレンダーを表示するビュー"""
-    template_name = 'schedule.html'
+# class MonthCalendar(mixins.MonthCalendarMixin, generic.TemplateView):
+#     """月間カレンダーを表示するビュー"""
+#     template_name = 'schedule.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        calendar_context = self.get_month_calendar()
-        context.update(calendar_context)
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         calendar_context = self.get_month_calendar()
+#         context.update(calendar_context)
+#         return context
 
 class MonthWithScheduleCalendar(mixins.MonthWithScheduleMixin, generic.TemplateView):
     """スケジュール付きの月間カレンダーを表示するビュー"""
@@ -67,8 +67,10 @@ class MonthWithScheduleCalendar(mixins.MonthWithScheduleMixin, generic.TemplateV
         context = super().get_context_data(**kwargs)
         calendar_context = self.get_month_calendar()
         context.update(calendar_context)
+        print(context)
+        myuser = self.request.user
+        context["myteam"] = Team.objects.get(members=myuser)
         return context
-
 
 # TR登録
 class RegisterView(mixins.MonthCalendarMixin, generic.CreateView):
@@ -80,9 +82,7 @@ class RegisterView(mixins.MonthCalendarMixin, generic.CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # week_calendar_context = self.get_week_calendar()
         month_calendar_context = self.get_month_calendar()
-        # context.update(week_calendar_context)
         context.update(month_calendar_context)
         return context
 
@@ -96,15 +96,19 @@ class RegisterView(mixins.MonthCalendarMixin, generic.CreateView):
             date = datetime.date.today()
         schedule = form.save(commit=False)
         schedule.date = date
+
+        myuser = self.request.user
+        schedule.team = Team.objects.get(members=myuser)
+
         schedule.save()
         return redirect('schedule:month_with_schedule', year=date.year, month=date.month)
+
 
 # TR詳細
 class ScheduleDetailView(mixins.MonthCalendarMixin, generic.DetailView):
     template_name = 'schedule_detail.html'
     model = Schedule
     date_field = 'date'
-    # form_class = RegisterForm
 
     def get_days(self):
         month = self.kwargs.get('month')
@@ -115,9 +119,7 @@ class ScheduleDetailView(mixins.MonthCalendarMixin, generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # week_calendar_context = self.get_week_calendar()
         month_calendar_context = self.get_month_calendar()
-        # context.update(week_calendar_context)
         context.update(month_calendar_context)
         return context
 

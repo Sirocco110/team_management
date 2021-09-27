@@ -47,7 +47,10 @@
                         {% endif %}
 
                         {% for schedule in schedules %}
-                            <a href="{% url 'schedule:schedule_detail' day.year day.month day.day schedule.id %}">{{ schedule.summary }}</a>
+                            {% if myteam == schedule.team %}
+
+                                <a href="{% url 'schedule:schedule_detail' day.year day.month day.day schedule.id %}">{{ schedule.summary }}</a>
+                            {% endif %}
                         {% endfor %}
                         {# プラスボタン #}
                         <div class="icon">

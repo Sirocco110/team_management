@@ -87,6 +87,7 @@ class TeamListView(mixins.MonthCalendarMixin, generic.ListView):
 	def get_queryset(self):
 		myuser = self.request.user
 		teams = myuser.team_set.all()
+
 		return teams
 
 

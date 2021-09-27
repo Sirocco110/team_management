@@ -3,13 +3,13 @@ from django.db import models
 #カレンダー用
 import datetime
 from django.utils import timezone
-from accounts.models import CustomUser
+from accounts.models import CustomUser, Team
 
 # Create your models here.
 
 class Schedule(models.Model):
 	"""docstring for Schedule"""
-	# user = models.ForeignKey(CustomUser, verbose_name="ユーザー",on_delete=models.PROTECT)
+	team = models.ForeignKey(Team, verbose_name="チーム", null=True, on_delete=models.PROTECT)
 	summary = models.CharField('概要', max_length=50)
 	place = models.CharField("場所", max_length=50, null=True)
 	start_time = models.TimeField('開始時間', default=datetime.time(7, 0, 0))
