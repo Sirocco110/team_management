@@ -177,4 +177,76 @@ class ReviewRegisterView(mixins.MonthCalendarMixin, generic.DetailView):
 
 		else:
 			return redirect('schedule:index')
+
+class AbsentCheckView(mixins.MonthCalendarMixin, generic.ListView):
+	template_name = 'absent_check.html'
+	model = Schedule
+	date_field = 'date'
+	# form_class = AbsentForm
+
+	def get_days(self):
+		month = self.kwargs.get('month')
+		year = self.kwargs.get('year')
+		day = self.kwargs.get('day')
+		date = datetime.date(year=int(year), month=int(month), day=int(day))
+		return date
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		month_calendar_context = self.get_month_calendar()
+		context.update(month_calendar_context)
+
+		myuser = self.request.user
+		teams = myuser.team_set.all()
+		schedule = Schedule.objects.get(pk=self.kwargs['pk'])
+		context["Team"] = teams
+		context["schedule"] = schedule
+		absents = Absent.objects.filter(schedule=schedule)
+		context["absents"] = absents
+		return context
+
+class ReviewCheckView(mixins.MonthCalendarMixin, generic.ListView):
+	template_name = 'review_check.html'
+	model = Schedule
+	date_field = 'date'
+	# form_class = AbsentForm
+
+	def get_days(self):
+		month = self.kwargs.get('month')
+		year = self.kwargs.get('year')
+		day = self.kwargs.get('day')
+		date = datetime.date(year=int(year), month=int(month), day=int(day))
+		return date
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		month_calendar_context = self.get_month_calendar()
+		context.update(month_calendar_context)
+
+		myuser = self.request.user
+		teams = myuser.team_set.all()
+		members = teams[0].members.all()
+		print(members)
+
+		schedule = Schedule.objects.get(pk=self.kwargs['pk'])
+		context["Team"] = teams
+		context["schedule"] = schedule
+		# context["members"] = members
+
+		prereviews = PreReview.objects.filter(schedule=schedule)
+		# context["prereviews"] = prereviews
+		reviews = Review.objects.filter(schedule=schedule)
+		# context["reviews"] = reviews
+		print(prereviews.filter(user=myuser))
+		review_set = []
+		for i in members:
+			prereview = prereviews.filter(user=i)
+			review = reviews.filter(user=i)
+			review_set.append([i,prereview,review])
+		context["review_sets"] = review_set
+		return context
+
+
+# person1 = Person.objects.get(id=1)
+# >>> person1.hobbys.all()
 			

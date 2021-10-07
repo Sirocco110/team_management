@@ -35,7 +35,8 @@
                                                 〜
                                                 {{ schedule.end_time }}
                                             </p>
-                                            <a href="{% url 'absent:absent_register' day.year day.month day.day schedule.id %}">欠席</a>
+                                            <a href="{% url 'absent:absent_register' day.year day.month day.day schedule.id %}">欠席連絡</a>
+                                            <a href="{% url 'absent:absent_check' day.year day.month day.day schedule.id %}">欠席者確認</a>
                                         </div>
                                         <hr>
                                     {% endif %}
