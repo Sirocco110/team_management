@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}欠席連絡 | Private Diary{% endblock %}
+
+{% block active_team_list %}active{% endblock %}
+
+{# {% block head %}
+<link href="{% static 'css/blog_styles.css' %}" rel="stylesheet">
+{% endblock %} #}
+
+{% block contents %}
+
+    <div class="my-div-style">
+        <a href="{% url 'absent:review' month_previous.year month_previous.month %}">前月</a>
+        {{ month_current | date:"Y年m月" }}
+        <a href="{% url 'absent:review' month_next.year month_next.month %}">次月</a>
+
+        <div class="container">
+            <div class="row">
+                <div class="my-div-style w-100">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+
+                        {% for week_day_schedles in month_day_schedules %}
+
+                            {% for day, schedules in week_day_schedles.items %}
+                                {% for schedule in schedules %}
+                                    {% if myteam == schedule.team %}
+                                        <div class="post-preview">
+                                            <p>
+                                                {{ schedule.date }}
+                                                {{ schedule.summary }}
+                                                {{ schedule.place }}
+                                                {{ schedule.start_time }}
+                                                〜
+                                                {{ schedule.end_time }}
+                                            </p>
+                                            <a href="{% url 'absent:prereview_register' day.year day.month day.day schedule.id %}">目標設定</a>
+                                            <a href="{% url 'absent:review_register' day.year day.month day.day schedule.id %}">振り返り</a>
+                                        </div>
+                                        <hr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

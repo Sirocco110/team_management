@@ -59,8 +59,16 @@
 	            </div>
 	        </div>
 
+
+
 	        <a class="btn btn-success mt-5 mb-3" href="{% url 'schedule:schedule_update' schedule.date.year schedule.date.month schedule.date.day object.pk %}">編集</a>
 	        <a class="btn btn-danger mt-5 ml-2 mb-3" href="{% url 'schedule:schedule_delete' schedule.date.year schedule.date.month schedule.date.day object.pk %}">削除</a>
+
+
+	        <a class="btn btn-danger mt-5 ml-2 mb-3" href="{% url 'absent:absent_register' schedule.date.year schedule.date.month schedule.date.day object.pk %}">欠席</a>
+	        <a class="btn btn-danger mt-5 ml-2 mb-3" href="{% url 'absent:prereview_register' schedule.date.year schedule.date.month schedule.date.day object.pk %}">目標設定</a>
+	        <a class="btn btn-danger mt-5 ml-2 mb-3" href="{% url 'absent:review_register' schedule.date.year schedule.date.month schedule.date.day object.pk %}">振り返り</a>
+
 	    </div>
 	</div>
 {% endblock %}

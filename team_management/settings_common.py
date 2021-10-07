@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     "schedule.apps.ScheduleConfig",
     "accounts.apps.AccountsConfig",
+    "absent.apps.AbsentConfig",
 
     "django.contrib.sites",
     "allauth",

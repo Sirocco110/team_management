@@ -39,6 +39,8 @@
 	                    	<li class="nav-item"><a class="nav-link" href="{% url 'accounts:team_create' %}">チームを作る</a></li>
 	                    	<li class="nav-item"><a class="nav-link" href="{% url 'accounts:team_join' %}">チームに参加</a></li>
 	                    	<li class="nav-item"><a class="nav-link" href="{% url 'accounts:team_list' %}">チーム詳細</a></li>
+	                    	<li class="nav-item"><a class="nav-link" href="{% url 'absent:absent' month_current.year month_current.month %}">欠席連絡</a></li>
+	                    	<li class="nav-item"><a class="nav-link" href="{% url 'absent:review' month_current.year month_current.month %}">振り返り</a></li>
 	                    	{% else %}
 	                    	<li class="nav-item {% block active_signup %}{% endblock %}"><a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a></li>
 	                        <li class="nav-item {% block active_login %}{% endblock %}"><a class="nav-link" href="{% url 'account_login' %}">Log In</a></li>
