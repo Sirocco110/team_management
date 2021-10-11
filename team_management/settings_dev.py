@@ -23,6 +23,12 @@ LOGGING = {
             "handlers": ["console"],
             "level": "DEBUG",   
         },
+
+        "absent": {
+            "handlers": ["console"],
+            "level": "DEBUG",   
+        },
+
     },
 
     #　ハンドラの設定

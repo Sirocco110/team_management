@@ -6,6 +6,8 @@ from django.contrib.auth.models import User,Group
 
 # Create your models here.
 class CustomUser(AbstractUser):
+	is_team_admin = models.BooleanField(default=False, verbose_name='team_admin status')
+	is_team_member = models.BooleanField(default=False, verbose_name='team_member status')
 
 	class Meta:
 		verbose_name_plural = 'CustomUser'

@@ -6,7 +6,6 @@ app_name = "schedule"
 urlpatterns = [
 	path("",views.IndexView.as_view(), name="index"),
 	path("inquiry/", views.InquiryView.as_view(), name="inquiry"),
-	# path("schedule/<int:year>_<int:month>/", views.MonthCalendar.as_view(), name='schedule'),
 	path('month_with_schedule/', views.MonthWithScheduleCalendar.as_view(), name='month_with_schedule'),
     path('month_with_schedule/<int:year>/<int:month>/', views.MonthWithScheduleCalendar.as_view(), name='month_with_schedule'),
     path("register_schedule/<int:year>_<int:month>_<int:day>/", views.RegisterView.as_view(), name="register"),

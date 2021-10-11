@@ -27,6 +27,12 @@ class IndexView(mixins.MonthCalendarMixin, generic.TemplateView):
         context = super().get_context_data(**kwargs)
         calendar_context = self.get_month_calendar()
         context.update(calendar_context)
+
+        myuser = self.request.user
+        teams = myuser.team_set.all()
+        team = teams[0]
+        context["team"] = team
+        
         return context
 
 class InquiryView(mixins.MonthCalendarMixin, generic.FormView):
@@ -47,16 +53,6 @@ class InquiryView(mixins.MonthCalendarMixin, generic.FormView):
         context.update(calendar_context)
         return context
 
-# class MonthCalendar(mixins.MonthCalendarMixin, generic.TemplateView):
-#     """月間カレンダーを表示するビュー"""
-#     template_name = 'schedule.html'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         calendar_context = self.get_month_calendar()
-#         context.update(calendar_context)
-#         return context
-
 class MonthWithScheduleCalendar(mixins.MonthWithScheduleMixin, generic.TemplateView):
     """スケジュール付きの月間カレンダーを表示するビュー"""
     template_name = 'month_with_schedule.html'
@@ -67,7 +63,6 @@ class MonthWithScheduleCalendar(mixins.MonthWithScheduleMixin, generic.TemplateV
         context = super().get_context_data(**kwargs)
         calendar_context = self.get_month_calendar()
         context.update(calendar_context)
-        print(context)
         myuser = self.request.user
         context["myteam"] = Team.objects.get(members=myuser)
         return context
@@ -151,16 +146,6 @@ class ScheduleUpdateView(mixins.MonthCalendarMixin, generic.UpdateView):
         return reverse_lazy("schedule:schedule_detail", kwargs={"year": year, "month": month, "day":day, "pk": pk})
 
     def form_valid(self, form):
-        # month = self.kwargs.get('month')
-        # year = self.kwargs.get('year')
-        # day = self.kwargs.get('day')
-        # if month and year and day:
-        #     date = datetime.date(year=int(year), month=int(month), day=int(day))
-        # else:
-        #     date = datetime.date.today()
-        # schedule = form.save(commit=False)
-        # schedule.date = date
-        # schedule.save()
         return super().form_valid(form)
 
 # TR削除
@@ -191,15 +176,5 @@ class ScheduleDeleteView(mixins.MonthCalendarMixin, generic.DeleteView):
         return reverse_lazy("schedule:month_with_schedule", kwargs={"year": year, "month": month})
 
     def form_valid(self, request, *args, **kwargs):
-        # month = self.kwargs.get('month')
-        # year = self.kwargs.get('year')
-        # day = self.kwargs.get('day')
-        # if month and year and day:
-        #     date = datetime.date(year=int(year), month=int(month), day=int(day))
-        # else:
-        #     date = datetime.date.today()
-        # schedule = form.save(commit=False)
-        # schedule.date = date
-        # schedule.save()
         return super().delete(request, *args, **kwargs)
 

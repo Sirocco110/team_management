@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     "schedule.apps.ScheduleConfig",
     "accounts.apps.AccountsConfig",
+    "absent.apps.AbsentConfig",
 
     "django.contrib.sites",
     "allauth",
@@ -189,5 +190,4 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 # デフォルトのメール送信元を設定
 DEFAULT_FROM_EMAIL = 'admin@example.com'
 
-LOGIN_REDIRECT_URL = 'schedule:month_with_schedule'
 
