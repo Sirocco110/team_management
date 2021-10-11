@@ -27,6 +27,12 @@ class IndexView(mixins.MonthCalendarMixin, generic.TemplateView):
         context = super().get_context_data(**kwargs)
         calendar_context = self.get_month_calendar()
         context.update(calendar_context)
+
+        myuser = self.request.user
+        teams = myuser.team_set.all()
+        team = teams[0]
+        context["team"] = team
+        
         return context
 
 class InquiryView(mixins.MonthCalendarMixin, generic.FormView):

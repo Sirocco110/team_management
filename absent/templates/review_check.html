@@ -40,20 +40,22 @@
 
             <div class="col-lg-8 col-md-10 mx-auto">
                 {% for review_set in review_sets %}
-                    <div class="post-preview"> 
-                      <p class="post-title">
-                        {{ review_set.0 }}
-                      </p>
-                      <p class="post-title">
-                        目標 : 
-                        {{ review_set.1.0.goal }}
-                      </p>
-                      <p class="post-title">
-                        振り返り : 
-                        {{ review_set.2.0.review }}
-                      </p>
-                    </div>
-                    <hr>
+                    {% if review_set.0 != user %}
+                        <div class="post-preview">
+                          <p class="post-title">
+                            {{ review_set.0 }}
+                          </p>
+                          <p class="post-title">
+                            目標 : 
+                            {{ review_set.1.0.goal }}
+                          </p>
+                          <p class="post-title">
+                            振り返り : 
+                            {{ review_set.2.0.review }}
+                          </p>
+                        </div>
+                        <hr>
+                    {% endif %}
                 {% empty %}
                     <p></p>
                 {% endfor %}

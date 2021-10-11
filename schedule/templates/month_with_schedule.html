@@ -52,10 +52,11 @@
                                 <a href="{% url 'schedule:schedule_detail' day.year day.month day.day schedule.id %}">{{ schedule.summary }}</a>
                             {% endif %}
                         {% endfor %}
-                        {# プラスボタン #}
-                        <div class="icon">
-                            <a href="{% url 'schedule:register' day.year day.month day.day %}"><img src="{% static 'assets/img/plus_icon.png' %}"></a>
-                        </div>
+                        {% if user.is_team_admin %}
+                            <div class="icon">
+                                <a href="{% url 'schedule:register' day.year day.month day.day %}"><img src="{% static 'assets/img/plus_icon.png' %}"></a>
+                            </div>
+                        {% endif %}
                     </div>
                     </td>
                     {% endfor %}

@@ -35,10 +35,12 @@
                                                 〜
                                                 {{ schedule.end_time }}
                                             </p>
-                                            <a href="{% url 'absent:prereview_register' day.year day.month day.day schedule.id %}">目標設定</a>
-                                            <a href="{% url 'absent:review_register' day.year day.month day.day schedule.id %}">振り返り</a>
-                                            <a href="{% url 'absent:review_check' day.year day.month day.day schedule.id %}">振り返り確認</a>
-
+                                            {% if user.is_team_admin %}
+                                                <a href="{% url 'absent:review_check' day.year day.month day.day schedule.id %}">振り返り確認</a>
+                                            {% else %}
+                                                <a href="{% url 'absent:prereview_register' day.year day.month day.day schedule.id %}">目標設定</a>
+                                                <a href="{% url 'absent:review_register' day.year day.month day.day schedule.id %}">振り返り</a>
+                                            {% endif %}
                                         </div>
                                         <hr>
                                     {% endif %}

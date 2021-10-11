@@ -8,9 +8,24 @@
 	<header class="masthead text-center text-white">
         <div class="masthead-content">
             <div class="container px-5">
-                <h1 class="masthead-heading mb-0">One Page Wonder</h1>
-                <h2 class="masthead-subheading mb-0">Will Rock Your Socks Off</h2>
-                <a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'account_login' %}">Log In</a>
+                <h1 class="masthead-heading mb-0">TeInfAre</h1>
+                <h2 class="masthead-subheading mb-0">TR総合管理アプリ〜らくらく一括管理〜</h2>
+
+                {% if user.is_authenticated %}
+                    {% if user.is_team_member %}
+                        <p>あなた：{{ user.username }}</p>
+                        <p>登録チーム：{{ team.name }}</p>
+                        {% if user.is_team_admin %}
+                            <p>登録コード：{{ team.code }}</p>
+                        {% endif %}
+                    {% else %}
+                        <p>チーム登録がされていません</p>
+                        <p>チームを作るか、すでにあるチームに参加してください</p>
+                    {% endif %}
+
+                {% else %}
+                    <a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'account_login' %}">Log In</a>
+                {% endif %}         
             </div>
         </div>
         <div class="bg-circle-1 bg-circle"></div>
@@ -29,8 +44,8 @@
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4">For those about to rock...</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <h2 class="display-4">予定の共有！</h2>
+                        <p>TRや試合など予定をチームメンバーに共有できます。編集や削除はチームの管理者のみが行えます。TR場所や時間、その他詳細についても一括で管理、共有可能です。</p>
                     </div>
                 </div>
             </div>
@@ -45,8 +60,8 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="p-5">
-                        <h2 class="display-4">We salute you!</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <h2 class="display-4">欠席確認！</h2>
+                        <p>欠席の登録、欠席者の確認が行えます。チームメンバーは登録された予定に対して欠席の連絡を行えます。欠席理由も合わせて連絡可能です。チーム管理者は予定から欠席者の確認が一括で行えます。</p>
                     </div>
                 </div>
             </div>
@@ -61,8 +76,8 @@
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4">Let there be rock!</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <h2 class="display-4">振り返り！</h2>
+                        <p>チームメンバーは予定ごとに目標を設定できます。また、その目標に対する振り返りも登録できます。チーム管理者はチームメンバーの目標、振り返りを一括で確認できます。これによりより細かいケアが可能です。</p>
                     </div>
                 </div>
             </div>

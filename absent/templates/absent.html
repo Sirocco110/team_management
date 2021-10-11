@@ -35,8 +35,12 @@
                                                 〜
                                                 {{ schedule.end_time }}
                                             </p>
-                                            <a href="{% url 'absent:absent_register' day.year day.month day.day schedule.id %}">欠席連絡</a>
-                                            <a href="{% url 'absent:absent_check' day.year day.month day.day schedule.id %}">欠席者確認</a>
+                                            
+                                            {% if user.is_team_admin %}
+                                                <a href="{% url 'absent:absent_check' day.year day.month day.day schedule.id %}">欠席者確認</a>
+                                            {% else %}
+                                                <a href="{% url 'absent:absent_register' day.year day.month day.day schedule.id %}">欠席連絡</a>
+                                            {% endif %} 
                                         </div>
                                         <hr>
                                     {% endif %}

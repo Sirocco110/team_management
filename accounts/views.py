@@ -39,9 +39,11 @@ class TeamCreateView(mixins.MonthCalendarMixin, generic.CreateView):
 		team.code = get_random_string(30)
 		team.save()
 		team.members.add(self.request.user)
-		# print(team.members.all)
-
-
+		
+		myuser = self.request.user
+		myuser.is_team_admin = True
+		myuser.is_team_member = True
+		myuser.save()
 		messages.success(self.request, "OK")
 		return super().form_valid(form)
 
@@ -63,11 +65,13 @@ class TeamJoinView(mixins.MonthCalendarMixin, generic.CreateView):
 		return context
 
 	def form_valid(self, form):
-		# code = form.save(commit=False)
 		code = form.cleaned_data['code']
 		team = Team.objects.get(code=code)
 		team.members.add(self.request.user)
-		# print(team.members.all)
+
+		myuser = self.request.user
+		myuser.is_team_member = True
+		myuser.save()
 
 		messages.success(self.request, "OK")
 		return super().form_valid(form)
