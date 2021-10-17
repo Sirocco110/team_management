@@ -19,6 +19,7 @@
 
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        {% block head %}{% endblock %}
     </head>
 
     <body id="page-top">
@@ -37,13 +38,12 @@
 		                    		<li class="nav-item"><a class="nav-link" href="{% url 'schedule:month_with_schedule' month_current.year month_current.month %}">Schedule</a></li>
 		                    		<li class="nav-item"><a class="nav-link" href="{% url 'absent:absent' month_current.year month_current.month %}">欠席連絡</a></li>
 		                    		<li class="nav-item"><a class="nav-link" href="{% url 'absent:review' month_current.year month_current.month %}">振り返り</a></li>
-		                    		<li class="nav-item"><a class="nav-link" href="{% url 'accounts:team_list' %}">チーム詳細</a></li>
 		                    	{% else %}
 		                    		<li class="nav-item"><a class="nav-link" href="{% url 'accounts:team_create' %}">チームを作る</a></li>
 		                    		<li class="nav-item"><a class="nav-link" href="{% url 'accounts:team_join' %}">チームに参加</a></li>
 		                    	{% endif %}
 
-	                    	<li class="nav-item"><a class="nav-link" href="{% url 'account_logout' %}">Log Out</a></li>
+	                    	<li class="nav-item"><a class="nav-link" href="{% url 'schedule:user_info' %}">ユーザー情報</a></li>
 
 	                    	{% else %}
 	                    		<li class="nav-item {% block active_signup %}{% endblock %}"><a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a></li>
@@ -64,7 +64,7 @@
 	        
 	        <!-- Footer-->
 	        <footer class="py-5 bg-black">
-	            <div class="container px-5"><p class="m-0 text-center text-white small">Copyright &copy; Your Website 2021</p></div>
+	            <div class="container px-5"><p class="m-0 text-center text-white small">Copyright &copy; Hiroki Ito 2021</p></div>
 	        </footer>
 	        <!-- Bootstrap core JS-->
 	        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>

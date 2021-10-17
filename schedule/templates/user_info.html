@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}チーム一覧 | Private Diary{% endblock %}
+
+{% block active_team_list %}active{% endblock %}
+
+
+
+{% block contents %}
+
+<div class="container">
+    <div class="row">
+        <div class="my-div-style w-100">
+                <div class="user_info_preview">
+                    <h2>{{ user.get_username }}でログイン中</h2>
+                    <br>
+
+                    {% for team in teams %}
+
+                        <h2 class="post-title">所属 : {{ team.name }}</h2>
+                        {% if user.is_team_admin %}
+                            <p class="post-subtitle">code : {{ team.code }}</p>
+                        {% endif %}
+                    
+                    {% empty %}
+                        <p>登録チームがありません。</p>
+                    {% endfor %}
+
+                    <a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'account_logout' %}">Log Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -10,28 +10,16 @@
             <div class="container px-5">
                 <h1 class="masthead-heading mb-0">TeInfAre</h1>
                 <h2 class="masthead-subheading mb-0">TR総合管理アプリ〜らくらく一括管理〜</h2>
-
                 {% if user.is_authenticated %}
-                    {% if user.is_team_member %}
-                        <p>あなた：{{ user.username }}</p>
-                        <p>登録チーム：{{ team.name }}</p>
-                        {% if user.is_team_admin %}
-                            <p>登録コード：{{ team.code }}</p>
-                        {% endif %}
-                    {% else %}
-                        <p>チーム登録がされていません</p>
-                        <p>チームを作るか、すでにあるチームに参加してください</p>
-                    {% endif %}
-
                 {% else %}
                     <a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'account_login' %}">Log In</a>
                 {% endif %}         
             </div>
         </div>
-        <div class="bg-circle-1 bg-circle"></div>
-        <div class="bg-circle-2 bg-circle"></div>
-        <div class="bg-circle-3 bg-circle"></div>
-        <div class="bg-circle-4 bg-circle"></div>
+        {# <div class="bg-circle-1 bg-circle"></div> #}
+        {# <div class="bg-circle-2 bg-circle"></div> #}
+        {# <div class="bg-circle-3 bg-circle"></div> #}
+        {# <div class="bg-circle-4 bg-circle"></div> #}
     </header>
 {% endblock %}
 

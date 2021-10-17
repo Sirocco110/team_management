@@ -46,10 +46,12 @@
                             {{ day.day }}
                         {% endif %}
 
+                        <br>
+
                         {% for schedule in schedules %}
                             {% if myteam == schedule.team %}
-
-                                <a href="{% url 'schedule:schedule_detail' day.year day.month day.day schedule.id %}">{{ schedule.summary }}</a>
+                                    <a class="s-btn" href="{% url 'schedule:schedule_detail' day.year day.month day.day schedule.id %}">{{ schedule.summary }}</a>
+                                    <br>
                             {% endif %}
                         {% endfor %}
                         {% if user.is_team_admin %}

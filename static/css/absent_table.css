@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+.abs_table table {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10%;
+}
+
+.abs_table th, td {
+  padding: 5px 15px; /* 上下 左右 */
+  border: solid 1px #a5d1f1;
+  font-size: 80%;
+}
+
+.abs_table {
+  overflow-x: scroll;
+}
+
+.abs_table .nowrap {
+  white-space: nowrap; /* 勝手に折り返さない */
+}
+
+.noborder {
+  border: 0px none;
+}
+
+.abs_table th {
+  color: #0d90f3;/* 見出しの文字色 */
+  background-color: #d0ebfd; /* 見出しの背景色 */
+}

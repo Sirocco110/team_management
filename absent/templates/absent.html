@@ -5,9 +5,9 @@
 
 {% block active_team_list %}active{% endblock %}
 
-{# {% block head %}
-<link href="{% static 'css/blog_styles.css' %}" rel="stylesheet">
-{% endblock %} #}
+{% block head %}
+<link href="{% static 'css/absent_table.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% block contents %}
 
@@ -19,34 +19,36 @@
         <div class="container">
             <div class="row">
                 <div class="my-div-style w-100">
-                    <div class="col-lg-8 col-md-10 mx-auto">
-
-                        {% for week_day_schedles in month_day_schedules %}
-
-                            {% for day, schedules in week_day_schedles.items %}
-                                {% for schedule in schedules %}
-                                    {% if myteam == schedule.team %}
-                                        <div class="post-preview">
-                                            <p>
-                                                {{ schedule.date }}
-                                                {{ schedule.summary }}
-                                                {{ schedule.place }}
-                                                {{ schedule.start_time }}
-                                                〜
-                                                {{ schedule.end_time }}
-                                            </p>
-                                            
-                                            {% if user.is_team_admin %}
-                                                <a href="{% url 'absent:absent_check' day.year day.month day.day schedule.id %}">欠席者確認</a>
-                                            {% else %}
-                                                <a href="{% url 'absent:absent_register' day.year day.month day.day schedule.id %}">欠席連絡</a>
-                                            {% endif %} 
-                                        </div>
-                                        <hr>
-                                    {% endif %}
+                    <div class="mx-auto abs_table">
+                        <table>
+                            <tr>
+                                <th>date</th>
+                                <th>内容</th>
+                                <th>場所</th>
+                                <th>開始</th>
+                                <th>終了</th>
+                            </tr>
+                            {% for week_day_schedles in month_day_schedules %}
+                                {% for day, schedules in week_day_schedles.items %}
+                                    {% for schedule in schedules %}
+                                        {% if myteam == schedule.team %}                
+                                            <tr>
+                                                <td>{{ schedule.date }}</td>
+                                                <td>{{ schedule.summary }}</td>
+                                                <td>{{ schedule.place }}</td>
+                                                <td>{{ schedule.start_time }}</td>
+                                                <td>{{ schedule.end_time }}</td>
+                                                {% if user.is_team_admin %}
+                                                    <td class="nowrap noborder"><a href="{% url 'absent:absent_check' day.year day.month day.day schedule.id %}" class="btn btn-primary">欠席者確認</a></td>
+                                                {% else %}
+                                                    <td class="nowrap noborder"><a href="{% url 'absent:absent_register' day.year day.month day.day schedule.id %}" class="btn btn-primary">欠席連絡</a></td>
+                                                {% endif %} 
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
                                 {% endfor %}
                             {% endfor %}
-                        {% endfor %}
+                        </table>
                     </div>
                 </div>
             </div>

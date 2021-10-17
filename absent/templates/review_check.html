@@ -5,63 +5,64 @@
 
 {% block active_team_list %}active{% endblock %}
 
-{# {% block head %}
-<link href="{% static 'css/blog_styles.css' %}" rel="stylesheet">
-{% endblock %} #}
+{% block head %}
+<link href="{% static 'css/absent_table.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% block contents %}
 
 <div class="container">
     <div class="row">
         <div class="my-div-style w-100">
-            <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="mx-auto abs_table">
                  {% for team in Team %}
                     <div class="post-preview"> 
                       <h2 class="post-title">
                         {{ team.name }}
                       </h2>
                     </div>
-                    <hr>
                 {% empty %}
                     <p>登録チームがありません。</p>
                 {% endfor %}
-            </div>
 
-            <div>
-                <p>
-                    {{ schedule.date }}
-                    {{ schedule.summary }}
-                    {{ schedule.place }}
-                    {{ schedule.start_time }}
-                    〜
-                    {{ schedule.end_time }}
-                </p>
-            </div>
+                <div>
+                    <p>
+                        {{ schedule.date }}
+                        {{ schedule.summary }}
+                    </p>
+                    <p>
+                        @{{ schedule.place }}
+                        {{ schedule.start_time }}
+                        〜
+                        {{ schedule.end_time }}
+                    </p>
+                </div>
 
-            <div class="col-lg-8 col-md-10 mx-auto">
-                {% for review_set in review_sets %}
-                    {% if review_set.0 != user %}
-                        <div class="post-preview">
-                          <p class="post-title">
-                            {{ review_set.0 }}
-                          </p>
-                          <p class="post-title">
-                            目標 : 
-                            {{ review_set.1.0.goal }}
-                          </p>
-                          <p class="post-title">
-                            振り返り : 
-                            {{ review_set.2.0.review }}
-                          </p>
-                        </div>
-                        <hr>
-                    {% endif %}
-                {% empty %}
-                    <p></p>
-                {% endfor %}
+                <table>
+                    <tr>
+                        <th>ユーザー</th>
+                        <th>目標</th>
+                        <th>振り返り</th>
+                    </tr>
+                    {% for review_set in review_sets %}
+                        {% if review_set.0 != user %}
+                            <tr>
+                                <td>{{ review_set.0 }}</td>
+                                <td>{{ review_set.1.0.goal }}</td>
+                                <td>{{ review_set.2.0.review }}</td>
+                            </tr>
+                        {% endif %}
+                    {% empty %}
+                        <p>チームメンバーがいません</p>
+                    {% endfor %}
+                </table>
             </div>
         </div>
     </div>
 </div>
 
 {% endblock %}
+
+
+
+                

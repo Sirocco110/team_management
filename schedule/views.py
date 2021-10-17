@@ -178,3 +178,21 @@ class ScheduleDeleteView(mixins.MonthCalendarMixin, generic.DeleteView):
     def form_valid(self, request, *args, **kwargs):
         return super().delete(request, *args, **kwargs)
 
+
+class UserInfoView(mixins.MonthCalendarMixin, generic.ListView):
+    model = Team
+    template_name = "user_info.html"
+
+    #日にちを持つのに必要
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        calendar_context = self.get_month_calendar()
+        context.update(calendar_context)
+
+        myuser = self.request.user
+        teams = myuser.team_set.all()
+
+        context["teams"] = teams
+
+        return context
+

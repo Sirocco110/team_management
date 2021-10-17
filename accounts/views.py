@@ -75,24 +75,3 @@ class TeamJoinView(mixins.MonthCalendarMixin, generic.CreateView):
 
 		messages.success(self.request, "OK")
 		return super().form_valid(form)
-
-
-class TeamListView(mixins.MonthCalendarMixin, generic.ListView):
-	model = Team
-	template_name = "team_list.html"
-
-	#日にちを持つのに必要
-	def get_context_data(self, **kwargs):
-		context = super().get_context_data(**kwargs)
-		calendar_context = self.get_month_calendar()
-		context.update(calendar_context)
-		return context
-
-	def get_queryset(self):
-		myuser = self.request.user
-		teams = myuser.team_set.all()
-
-		return teams
-
-
-# team_user.teams.code = get_random_string(20)

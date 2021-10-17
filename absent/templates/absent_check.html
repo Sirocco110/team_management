@@ -5,54 +5,56 @@
 
 {% block active_team_list %}active{% endblock %}
 
-{# {% block head %}
-<link href="{% static 'css/blog_styles.css' %}" rel="stylesheet">
-{% endblock %} #}
+{% block head %}
+<link href="{% static 'css/absent_table.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% block contents %}
 
 <div class="container">
     <div class="row">
         <div class="my-div-style w-100">
-            <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="mx-auto abs_table">
                  {% for team in Team %}
                     <div class="post-preview"> 
                       <h2 class="post-title">
                         {{ team.name }}
                       </h2>
                     </div>
-                    <hr>
                 {% empty %}
                     <p>登録チームがありません。</p>
                 {% endfor %}
-            </div>
 
-            <div>
-                <p>
-                    {{ schedule.date }}
-                    {{ schedule.summary }}
-                    {{ schedule.place }}
-                    {{ schedule.start_time }}
-                    〜
-                    {{ schedule.end_time }}
-                </p>
-            </div>
+                <div>
+                    <p>
+                        {{ schedule.date }}
+                        {{ schedule.summary }}
+                    </p>
+                    <p>
+                        @{{ schedule.place }}
+                        {{ schedule.start_time }}
+                        〜
+                        {{ schedule.end_time }}
+                    </p>
+                </div>
 
-            <div class="col-lg-8 col-md-10 mx-auto">
-                 {% for absent in absents %}
-                    <div class="post-preview"> 
-                      <p class="post-title">
-                        {{ absent.user.username }}
-                      </p>
-                      <p class="post-title">
-                        欠席理由 : 
-                        {{ absent.reason }}
-                      </p>
-                    </div>
-                    <hr>
-                {% empty %}
-                    <p>欠席者はいません</p>
-                {% endfor %}
+                <table>
+                    <tr>
+                        <th>欠席者</th>
+                        <th>欠席理由</th>
+                    </tr>
+                    {% for absent in absents %}
+                        <tr>
+                            <td>{{ absent.user.username }}</td>
+                            <td>{{ absent.reason }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="2">欠席者はいません</td>
+                        <tr>
+                    {% endfor %}
+                </table>
+            
             </div>
         </div>
     </div>
