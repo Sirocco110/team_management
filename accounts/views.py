@@ -25,7 +25,7 @@ class TeamCreateView(mixins.MonthCalendarMixin, generic.CreateView):
 	model = Team
 	template_name = "team_create.html"
 	form_class = TeamCreateForm
-	success_url = reverse_lazy("accounts:team_list")
+	success_url = reverse_lazy("schedule:index")
 
 	#日にちを持つのに必要
 	def get_context_data(self, **kwargs):
