@@ -72,6 +72,7 @@ class TestScheduleCreateView(LoggedInTestCase):
                 "month": int(date.month),
                 "day": int(date.day)}
 
+
         # 新規日記作成処理(Post)を実行
         response = self.client.post(reverse_lazy('schedule:register',kwargs=kwargs), params)
 
