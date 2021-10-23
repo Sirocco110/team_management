@@ -7,4 +7,4 @@ pillow
 dj-database-url
 gunicorn
 whitenoise
-django-herok
+django-heroku
