@@ -20,7 +20,7 @@ services:
       - ./.env.development
 
   db:
-    image: postgres
+    image: postgres:13
     ports: 
             - "5432"
     env_file:
