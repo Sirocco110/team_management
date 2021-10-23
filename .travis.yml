@@ -10,6 +10,7 @@ script:
   - docker-compose ps
   - docker-compose exec web python3 manage.py migrate --settings team_management.settings_dev
   - docker-compose exec web python3 manage.py test --settings team_management.settings_dev
+  - docker-compose ps
 
 # deploy:
 #   provider: script
