@@ -3,7 +3,7 @@ psycopg2
 django-allauth
 pillow
 
-# この下が新たに追加するライブラリ
+# 新たに追加するライブラリ
 dj-database-url
 gunicorn
 whitenoise
