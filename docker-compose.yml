@@ -22,13 +22,10 @@ services:
   db:
     image: postgres
     ports: 
-            - "5432:5432"
+            - "5432"
     env_file:
       - ./.env.development
     volumes:
       - "data_base:/var/lib/postgresql/data"
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
