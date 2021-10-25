@@ -28,10 +28,10 @@ class IndexView(mixins.MonthCalendarMixin, generic.TemplateView):
         calendar_context = self.get_month_calendar()
         context.update(calendar_context)
 
-        myuser = self.request.user
-        teams = myuser.team_set.all()
-        team = teams[0]
-        context["team"] = team
+        # myuser = self.request.user
+        # teams = myuser.team_set.all()
+        # team = teams[0]
+        # context["team"] = team
         
         return context
 
@@ -195,17 +195,3 @@ class UserInfoView(mixins.MonthCalendarMixin, generic.ListView):
         context["teams"] = teams
 
         return context
-
-
-
-# エラーログ
-from django.views.decorators.csrf import requires_csrf_token
-from django.http import HttpResponseServerError
-
-@requires_csrf_token
-def my_customized_server_error(request, template_name='500.html'):
-    import sys
-    from django.views import debug
-    error_html = debug.technical_500_response(request, *sys.exc_info()).content
-    return HttpResponseServerError(error_html)
-
