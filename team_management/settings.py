@@ -3,7 +3,7 @@ import dj_database_url
 
 
 # デバッグモードを有効にするかどうか(本番運用では必ずFalseにする)
-DEBUG = False
+DEBUG = True
 
 # 許可するホスト名のリスト
 ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
