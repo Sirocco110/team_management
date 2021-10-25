@@ -14,3 +14,5 @@ urlpatterns = [
     path("schedule_delete/<int:year>_<int:month>_<int:day>/<int:pk>/", views.ScheduleDeleteView.as_view(), name="schedule_delete"),
     path("user_info/", views.UserInfoView.as_view(), name="user_info"),
 ]
+
+handler500 = views.my_customized_server_error
