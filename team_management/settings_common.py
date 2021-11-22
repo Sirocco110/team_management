@@ -172,6 +172,7 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
 )
 
+
 # メールアドレス認証に変更する設定
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_USERNAME_REQUIRED = False
@@ -191,6 +192,4 @@ ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 
 # デフォルトのメール送信元を設定
-DEFAULT_FROM_EMAIL = 'admin@example.com'
-
-
+DEFAULT_FROM_EMAIL = 's2120409@s.tsukuba.ac.jp'
